@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GPN Lab · Gestionali su misura per piccole attività</title>
-<meta name="description" content="GPN Lab costruisce gestionali su misura per palestre, personal trainer e negozi all'ingrosso. Uno strumento fatto sul vostro modo di lavorare.">
+<meta name="description" content="GPN Lab costruisce gestionali su misura per palestre, personal trainer, negozi all'ingrosso ed elettricisti. Uno strumento fatto sul vostro modo di lavorare.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23121316'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23166534'/%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -39,7 +39,7 @@
   .btn-2 { display: inline-block; padding: 14px 0; font-weight: 500; font-size: 15px; text-underline-offset: 4px; }
 
   /* lavori */
-  .lavori { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding-bottom: 72px; scroll-margin-top: 24px; }
+  .lavori { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; padding-bottom: 72px; scroll-margin-top: 24px; }
   .lavoro { background: var(--carta); border-radius: 20px; padding: 22px; border: 1px solid var(--bordo); display: flex; flex-direction: column; }
   .lavoro .info { padding: 18px 4px 4px; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
   .lavoro h3 { font-size: 22px; margin-bottom: 6px; }
@@ -48,6 +48,21 @@
   .lavoro .link:hover { text-decoration: underline; text-underline-offset: 4px; }
   .stato { font-size: 12px; font-weight: 600; color: var(--verde); background: var(--verde-chiaro); padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
   .stato.grigio { color: var(--testo-2); background: #EAEAE6; }
+
+  /* anteprime tutte alte uguali: i titoli sotto partono alla stessa riga */
+  .lavori .app { height: 262px; }
+
+  /* anteprima chiara (elettricista: si usa al sole) */
+  .app.chiara { background: #F5F4F0; color: #111214; border: 1px solid #DEDCD5; padding: 0; overflow: hidden; }
+  .chiara .striscia { background: var(--app); color: var(--app-testo); padding: 14px 16px 12px; }
+  .chiara .striscia .s { margin-bottom: 2px; }
+  .chiara .striscia .grosso { font-size: 38px; }
+  .chiara .corpo { padding: 12px 14px 14px; }
+  .chiara .case { display: flex; gap: 6px; margin-bottom: 10px; }
+  .chiara .case span { border: 1px solid #DEDCD5; background: #fff; border-radius: 99px; padding: 4px 10px; font-weight: 600; font-size: 12px; color: #4A4D55; }
+  .chiara .case span.on { background: var(--verde); border-color: var(--verde); color: #fff; }
+  .chiara .riga { background: #fff; border: 1px solid #DEDCD5; }
+  .chiara .riga small { color: #4A4D55; font-size: 11px; margin-left: 6px; }
 
   /* anteprime delle app (disegnate, non screenshot) */
   .app { background: var(--app); border-radius: 14px; padding: 18px; color: var(--app-testo); font-size: 13px; min-height: 230px; }
@@ -75,6 +90,9 @@
   .piede .contenuto { padding-top: 26px; padding-bottom: 26px; display: flex; justify-content: space-between; font-size: 13px; color: var(--testo-2); gap: 16px; }
   .slogan { font-variant: small-caps; letter-spacing: .12em; font-size: 12px; }
 
+  /* tablet: due colonne */
+  @media (max-width: 1080px) and (min-width: 761px) { .lavori { grid-template-columns: 1fr 1fr; } }
+
   /* telefono */
   @media (max-width: 760px) {
     .contenuto { padding: 0 20px; }
@@ -84,6 +102,8 @@
     h1 { font-size: 40px; }
     .eroe p { font-size: 17px; }
     .lavori { grid-template-columns: 1fr; gap: 16px; padding-bottom: 48px; }
+    .chiara .striscia .grosso { font-size: 34px; }
+    .lavori .app { height: auto; }
     .lavoro { padding: 14px; }
     .passi { grid-template-columns: 1fr; gap: 22px; padding-top: 44px; padding-bottom: 44px; }
     .piede .contenuto { flex-direction: column; }
@@ -100,7 +120,7 @@
 <main>
   <section class="contenuto eroe">
     <h1>Gestionali su misura per piccole attività.</h1>
-    <p>Palestre, personal trainer, negozi all'ingrosso. Uno strumento costruito sul vostro modo di lavorare, non un programma generico da adattare.</p>
+    <p>Palestre, personal trainer, negozi all'ingrosso, elettricisti. Uno strumento costruito sul vostro modo di lavorare, non un programma generico da adattare.</p>
     <a class="btn-2" href="#lavori">Vedi i lavori ↓</a>
   </section>
 
@@ -128,6 +148,21 @@
       <div class="info">
         <div><h3>Preventivi per l'ingrosso</h3><p>Quantità, capi, stampa e scaglioni: il preventivo pronto al banco, da mandare su WhatsApp.</p>
           <a class="link" href="https://ngaspare6-programmer.github.io/preventivi-demo/" target="_blank" rel="noopener">Prova il prototipo →</a></div>
+        <span class="stato grigio">Prototipo</span>
+      </div>
+    </article>
+    <article class="lavoro">
+      <div class="app chiara" aria-hidden="true">
+        <div class="striscia"><div class="s">Preventivo · Trilocale</div><div class="grosso">€ 2.095</div></div>
+        <div class="corpo">
+          <div class="case"><span>Bilocale</span><span class="on">Trilocale</span><span>Villetta</span></div>
+          <div class="riga"><span>Soggiorno<small>9 punti</small></span><span class="n">€ 610</span></div>
+          <div class="pieno">Manda su WhatsApp</div>
+        </div>
+      </div>
+      <div class="info">
+        <div><h3>Preventivi per elettricisti</h3><p>Scegli il tipo di casa e il numero c'è già; poi si ritocca stanza per stanza, anche in cantiere.</p>
+          <a class="link" href="https://ngaspare6-programmer.github.io/elettricista-demo/" target="_blank" rel="noopener">Prova il prototipo →</a></div>
         <span class="stato grigio">Prototipo</span>
       </div>
     </article>
