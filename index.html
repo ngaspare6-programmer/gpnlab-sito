@@ -52,17 +52,20 @@
   /* anteprime tutte alte uguali: i titoli sotto partono alla stessa riga */
   .lavori .app { height: 262px; }
 
-  /* anteprima chiara (elettricista: si usa al sole) */
-  .app.chiara { background: #F5F4F0; color: #111214; border: 1px solid #DEDCD5; padding: 0; overflow: hidden; }
-  .chiara .striscia { background: var(--app); color: var(--app-testo); padding: 14px 16px 12px; }
-  .chiara .striscia .s { margin-bottom: 2px; }
-  .chiara .striscia .grosso { font-size: 38px; }
-  .chiara .corpo { padding: 12px 14px 14px; }
-  .chiara .case { display: flex; gap: 6px; margin-bottom: 10px; }
-  .chiara .case span { border: 1px solid #DEDCD5; background: #fff; border-radius: 99px; padding: 4px 10px; font-weight: 600; font-size: 12px; color: #4A4D55; }
-  .chiara .case span.on { background: var(--verde); border-color: var(--verde); color: #fff; }
-  .chiara .riga { background: #fff; border: 1px solid #DEDCD5; }
-  .chiara .riga small { color: #4A4D55; font-size: 11px; margin-left: 6px; }
+  /* anteprima chiara (elettricista: fondo bianco, si usa al sole; si apre sui ritocchi) */
+  .app.chiara { background: #FFFFFF; color: #111214; border: 1px solid #DEDCD5; padding: 14px 14px 12px; display: flex; flex-direction: column; }
+  .chiara .tot { font-family: 'Space Grotesk'; font-weight: 700; font-size: 30px; line-height: 1; }
+  .chiara .s { color: #4A4D55; font-size: 11px; margin: 3px 0 10px; }
+  .chiara .tab { display: flex; gap: 14px; font-size: 12px; font-weight: 600; color: #4A4D55; border-bottom: 1px solid #DEDCD5; margin-bottom: 6px; }
+  .chiara .tab span { padding-bottom: 6px; }
+  .chiara .tab .on { color: #111214; border-bottom: 2px solid #111214; }
+  .chiara .voce { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; font-size: 13px; font-weight: 600; }
+  .chiara .voce small { display: block; font-weight: 400; color: #4A4D55; font-size: 11px; }
+  .chiara .pm { display: flex; align-items: center; gap: 8px; }
+  .chiara .pm i { font-style: normal; width: 26px; height: 26px; border: 1.5px solid #DEDCD5; border-radius: 8px; display: grid; place-items: center; font-weight: 700; }
+  .chiara .pm i.piu { border-color: #111214; }
+  .chiara .pm b { font-family: 'Space Grotesk'; font-size: 17px; min-width: 14px; text-align: center; }
+  .chiara .pieno { margin-top: auto; }
 
   /* anteprime delle app (disegnate, non screenshot) */
   .app { background: var(--app); border-radius: 14px; padding: 18px; color: var(--app-testo); font-size: 13px; min-height: 230px; }
@@ -102,7 +105,6 @@
     h1 { font-size: 40px; }
     .eroe p { font-size: 17px; }
     .lavori { grid-template-columns: 1fr; gap: 16px; padding-bottom: 48px; }
-    .chiara .striscia .grosso { font-size: 34px; }
     .lavori .app { height: auto; }
     .lavoro { padding: 14px; }
     .passi { grid-template-columns: 1fr; gap: 22px; padding-top: 44px; padding-bottom: 44px; }
@@ -153,15 +155,14 @@
     </article>
     <article class="lavoro">
       <div class="app chiara" aria-hidden="true">
-        <div class="striscia"><div class="s">Preventivo · Trilocale</div><div class="grosso">€ 2.095</div></div>
-        <div class="corpo">
-          <div class="case"><span>Bilocale</span><span class="on">Trilocale</span><span>Villetta</span></div>
-          <div class="riga"><span>Soggiorno<small>9 punti</small></span><span class="n">€ 610</span></div>
-          <div class="pieno">Manda su WhatsApp</div>
-        </div>
+        <div class="tot">€ 635</div><div class="s">11 punti · 1 stanza · IVA esclusa</div>
+        <div class="tab"><span class="on">Soggiorno</span><span>Tutta la casa</span><span>+</span></div>
+        <div class="voce"><span>Punti luce<small>€ 60 l'uno</small></span><span class="pm"><i>−</i><b>6</b><i class="piu">+</i></span></div>
+        <div class="voce"><span>Prese<small>€ 55 l'una</small></span><span class="pm"><i>−</i><b>5</b><i class="piu">+</i></span></div>
+        <div class="pieno">Avanti: Tutta la casa →</div>
       </div>
       <div class="info">
-        <div><h3>Preventivi per elettricisti</h3><p>Scegli il tipo di casa e il numero c'è già; poi si ritocca stanza per stanza, anche in cantiere.</p>
+        <div><h3>Preventivi per elettricisti</h3><p>Si conta stanza per stanza, con tasti grandi da usare anche in cantiere; il totale della casa è sempre in vista.</p>
           <a class="link" href="https://ngaspare6-programmer.github.io/elettricista-demo/" target="_blank" rel="noopener">Prova il prototipo →</a></div>
         <span class="stato grigio">Prototipo</span>
       </div>
