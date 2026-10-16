@@ -97,6 +97,22 @@
   .piede { border-top: 1px solid var(--bordo); background: var(--carta); }
   .piede .contenuto { padding-top: 26px; padding-bottom: 26px; display: flex; justify-content: space-between; font-size: 13px; color: var(--testo-2); gap: 16px; }
   .slogan { font-variant: small-caps; letter-spacing: .12em; font-size: 12px; }
+  .piede .destra { display: inline-flex; align-items: center; gap: 10px; }
+
+  /* tulipano: un grazie nascosto, per chi lo cerca */
+  .tulipano { background: none; border: 0; padding: 2px; margin: -2px; cursor: pointer; color: var(--testo-2); line-height: 0; border-radius: 6px; transition: color .2s; }
+  .tulipano:hover, .tulipano:focus-visible { color: #D9466F; }
+  .tulipano svg { width: 14px; height: 14px; }
+  .grazie { position: fixed; right: 24px; bottom: 76px; max-width: 320px; background: var(--carta); border: 1px solid var(--bordo); border-radius: 16px; padding: 18px 20px 16px; box-shadow: 0 12px 40px rgba(18,19,22,.14); font-size: 15px; line-height: 1.55; color: var(--testo); z-index: 20; }
+  .grazie[hidden] { display: none; }
+  .grazie h3 { font-size: 17px; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
+  .grazie h3 svg { width: 16px; height: 16px; color: #D9466F; }
+  .grazie p { margin: 0; color: var(--testo-2); white-space: pre-line; }
+  .grazie form { display: flex; gap: 8px; margin-top: 12px; }
+  .grazie form[hidden] { display: none; }
+  .grazie input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--bordo); border-radius: 10px; background: var(--fondo); color: var(--testo); }
+  .grazie form button { background: var(--testo); color: #fff; border: 0; border-radius: 10px; padding: 0 14px; font-weight: 600; cursor: pointer; }
+  .grazie .chiudi { position: absolute; top: 8px; right: 10px; background: none; border: 0; font-size: 20px; line-height: 1; color: var(--testo-2); cursor: pointer; padding: 4px; }
 
   /* tablet: due colonne */
   @media (max-width: 1080px) and (min-width: 761px) { .lavori { grid-template-columns: 1fr 1fr; } }
@@ -114,6 +130,7 @@
     .lavoro { padding: 14px; }
     .passi { grid-template-columns: 1fr; gap: 22px; padding-top: 44px; padding-bottom: 44px; }
     .piede .contenuto { flex-direction: column; }
+    .grazie { left: 16px; right: 16px; bottom: 16px; max-width: none; }
   }
 </style>
 </head>
@@ -189,8 +206,52 @@
 </main>
 
 <footer class="piede">
-  <div class="contenuto"><span>© 2026 GPN Lab</span><span class="slogan">Innovative Management Solutions</span></div>
+  <div class="contenuto"><span>© 2026 GPN Lab</span><span class="destra"><span class="slogan">Innovative Management Solutions</span><button class="tulipano" id="tulipano" aria-label="Un grazie" aria-expanded="false" aria-controls="grazie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14c-3.3 0-5-2.6-5-6V4l2.5 2L12 3l2.5 3L17 4v4c0 3.4-1.7 6-5 6z"/><path d="M12 14v7"/><path d="M12 19c-1.5-2-3.5-2.5-5-2.5 .5 2 2.5 3 5 2.5zM12 18c1.3-1.8 3-2.3 4.5-2.3-.5 1.8-2.3 2.7-4.5 2.3z"/></svg></button></span></div>
 </footer>
+
+<div class="grazie" id="grazie" role="dialog" aria-labelledby="grazie-titolo" hidden>
+  <button class="chiudi" id="chiudi-grazie" aria-label="Chiudi">×</button>
+  <h3 id="grazie-titolo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 14c-3.3 0-5-2.6-5-6V4l2.5 2L12 3l2.5 3L17 4v4c0 3.4-1.7 6-5 6z"/><path d="M12 14v7"/><path d="M12 19c-1.5-2-3.5-2.5-5-2.5 .5 2 2.5 3 5 2.5zM12 18c1.3-1.8 3-2.3 4.5-2.3-.5 1.8-2.3 2.7-4.5 2.3z"/></svg>Grazie</h3>
+  <p id="grazie-testo">Un grazie a chi c'è sempre.</p>
+  <form id="grazie-form" autocomplete="off">
+    <input id="grazie-parola" type="password" placeholder="Hai la parola?" aria-label="Parola segreta">
+    <button>Apri</button>
+  </form>
+</div>
+<script>
+  // tulipano: apre e chiude il grazie (anche con Esc o cliccando fuori)
+  const tul = document.getElementById("tulipano"), gr = document.getElementById("grazie");
+  const apri = v => {
+    gr.hidden = !v; tul.setAttribute("aria-expanded", v);
+    if (!v) { // alla chiusura si riparte dalla parola segreta: il messaggio non resta aperto
+      document.getElementById("grazie-testo").textContent = "Un grazie a chi c'è sempre.";
+      const campo = document.getElementById("grazie-parola");
+      campo.value = ""; campo.placeholder = "Hai la parola?";
+      document.getElementById("grazie-form").hidden = false;
+    }
+  };
+  tul.addEventListener("click", e => { e.stopPropagation(); apri(gr.hidden); });
+  document.getElementById("chiudi-grazie").addEventListener("click", () => apri(false));
+  document.addEventListener("click", e => { if (!gr.hidden && !gr.contains(e.target)) apri(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") apri(false); });
+
+  // il messaggio vero è cifrato: si apre solo con la parola giusta (PBKDF2 + AES-GCM, nessuna libreria)
+  const GRAZIE = {"sale":"sHSMeuWYXCOVKmPoU4KKzw==","iv":"/aRcenWa1Vl22UlX","dati":"YNKGs1OaRk4HuIp8cij46hVNf2djYLuecrnTCZsMmDrGEBrv/SWxNP01uEPdEZlBMkEOsjxA891lZhF/UkXkQ0RRy5nvvmfR/byU3spqhVGkMF6lvmg+XxMdsSYPoTfeaLU0LHGKC00lE0qpeez+Y/YoAznKtHAX+1RCpRzSxRRopa8dPjgpylyV8W2g+uavpsXuWUnSfVB93p4c+Kpi4MqNa6lauV0Y2S2yx/QZSzpY3aZ1SihTwXVzNYbi1hUqM0Ydit2rrmnUhYp/WGl2Jp/VJcVWeOR11wWNdZ+VT5A69wioE4GimAskbziShfbTq/EIp3etCDey0pHwP6WDaYbeP+zpKAougEf9CrMgvmPxUhinKusTLgF/bkPkFyyNirtdfRHPaAHZb1HexQFjACI5bq4="}; // creato con strumenti/cifra-grazie.html (16/10/2026)
+  const da64 = t => Uint8Array.from(atob(t), c => c.charCodeAt(0));
+  document.getElementById("grazie-form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const campo = document.getElementById("grazie-parola"), testo = document.getElementById("grazie-testo");
+    const parola = campo.value.trim().toLowerCase();
+    campo.value = "";
+    try {
+      const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(parola), "PBKDF2", false, ["deriveKey"]);
+      const chiave = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: da64(GRAZIE.sale), iterations: 250000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+      const chiaro = await crypto.subtle.decrypt({ name: "AES-GCM", iv: da64(GRAZIE.iv) }, chiave, da64(GRAZIE.dati));
+      testo.textContent = new TextDecoder().decode(chiaro);
+      document.getElementById("grazie-form").hidden = true;
+    } catch { testo.textContent = "Un grazie a chi c'è sempre."; campo.placeholder = "Non è questa. Riprova?"; }
+  });
+</script>
 
 </body>
 </html>
