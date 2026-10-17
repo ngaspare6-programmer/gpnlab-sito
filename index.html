@@ -52,6 +52,22 @@
   /* anteprime tutte alte uguali: i titoli sotto partono alla stessa riga */
   .lavori .app { height: 262px; }
 
+  /* anteprima ingrosso: la vetrina dei capi in griglia 2×2 (diversa dalla fila dell'elettricista) */
+  .vet .filtri { display: flex; gap: 5px; margin-bottom: 9px; flex-wrap: nowrap; overflow: hidden; }
+  .vet .filtri span { border: 1px solid var(--app-el); border-radius: 99px; padding: 3px 9px; font-size: 10.5px; font-weight: 600; color: var(--app-testo-2); white-space: nowrap; }
+  .vet .filtri .on { background: var(--app-testo); color: var(--app); border-color: var(--app-testo); }
+  .vet .vetrina { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+  .vet .capo { background: var(--app-card); border: 1px solid var(--app-el); border-radius: 11px; padding: 8px 9px; font-size: 10.5px; line-height: 1.3; }
+  .vet .capo.scelto { border-color: var(--app-verde); }
+  .vet .capo i { display: grid; place-items: center; height: 30px; background: var(--app-el); border-radius: 8px; margin-bottom: 5px; color: var(--app-testo); }
+  .vet .capo i svg { width: 24px; height: 24px; }
+  .vet .capo small { display: block; color: var(--app-testo-2); font-size: 9.5px; }
+  .vet .capo strong { display: block; font-family: 'Space Grotesk'; font-size: 13px; margin-top: 2px; }
+  .vet .qta { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .vet .qta em { font-style: normal; width: 18px; height: 18px; border: 1.5px solid var(--app-el); border-radius: 5px; display: grid; place-items: center; font-weight: 700; font-size: 11px; }
+  .vet .qta em.piu { border-color: var(--app-verde); color: var(--app-verde); }
+  .vet .qta b { font-family: 'Space Grotesk'; font-size: 14px; color: var(--app-verde); }
+
   /* anteprima elettricista: la stanza con il catalogo delle aziende (scura come la demo dal 16/10) */
   .cat .testa { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
   .cat .testa b { font-family: 'Space Grotesk'; font-weight: 700; font-size: 26px; }
@@ -162,15 +178,17 @@
       </div>
     </article>
     <article class="lavoro">
-      <div class="app" aria-hidden="true">
-        <div class="s">Nuovo preventivo</div>
-        <div class="grosso">120 <span class="chip">INGROSSO</span></div>
-        <div class="tasti"><span>+10</span><span>+30</span><span>+50</span><span>+100</span></div>
-        <div class="riga"><span>Felpa · DTF fronte</span><span class="n">8,40</span></div>
-        <div class="pieno">Avanti</div>
+      <div class="app vet" aria-hidden="true">
+        <div class="filtri"><span class="on">Felpe</span><span>T-shirt</span><span>Polo</span><span>Tutti i fornitori ▾</span></div>
+        <div class="vetrina">
+          <div class="capo scelto"><i><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M11 5c1 2.5 3 4 5 4s4-1.5 5-4l6 4-2 15h-3v3H10v-3H7L5 9l6-4z"/><path d="M13 9.5l3 4 3-4M12 21h8"/></svg></i><div>Marca A · Felpa<small>FA-310</small><span class="qta"><em>−</em><b>55</b><em class="piu">+</em></span></div></div>
+          <div class="capo"><i><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M11 5c1 2.5 3 4 5 4s4-1.5 5-4l6 4-2 15h-3v3H10v-3H7L5 9l6-4z"/><path d="M13 9.5l3 4 3-4M12 21h8"/></svg></i><div>Marca B · Zip<small>FB-122</small><strong>€ 14,20</strong></div></div>
+          <div class="capo"><i><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M11 5l-6 4 2.5 4.5L10 12v15h12V12l2.5 1.5L27 9l-6-4c-1 2-3 3-5 3s-4-1-5-3z"/></svg></i><div>Marca A · T-shirt<small>TA-150</small><strong>€ 3,90</strong></div></div>
+          <div class="capo"><i><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 5l-7 4 2.5 4.5L10 12v15h12V12l2.5 1.5L27 9l-7-4-4 4-4-4z"/><path d="M16 9v5"/></svg></i><div>Marca C · Polo<small>PC-205</small><strong>€ 8,70</strong></div></div>
+        </div>
       </div>
       <div class="info">
-        <div><h3>Preventivi per l'ingrosso</h3><p>Quantità, capi, stampa e scaglioni: il preventivo pronto al banco, da mandare su WhatsApp.</p>
+        <div><h3>Preventivi per l'ingrosso</h3><p>I capi si scelgono dal catalogo dei fornitori, con marca, codice e prezzo; il preventivo arriva al cliente in PDF.</p>
           <a class="link" href="https://ngaspare6-programmer.github.io/preventivi-demo/" target="_blank" rel="noopener">Prova il prototipo →</a></div>
         <span class="stato grigio">Prototipo</span>
       </div>
